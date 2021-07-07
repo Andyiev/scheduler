@@ -2,7 +2,7 @@ import React from "react";
 
 import "components/Appointment/styles.scss";
 
-const Empty = function (props) {
+const Empty = function(props) {
   return (
     <main className="appointment__add">
       <img 
