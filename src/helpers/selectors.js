@@ -1,4 +1,4 @@
-export function getAppointmentsForDay(state, day) {
+export default function getAppointmentsForDay(state, day) {
 
   const result = [];
   if (!day) {
@@ -14,7 +14,7 @@ let appointmentNumbers;
 
   for (let dayFromDays of state.days) {
     if (day === dayFromDays.name) {
-       appointmentNumbers = [... dayFromDays.appointments];
+       appointmentNumbers = [...dayFromDays.appointments];
     }
   }
 
