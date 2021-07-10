@@ -22,7 +22,15 @@ export default function Application(props) {
   }, []);
 
   const setDay = day => setState({ ...state, day });
+
   function bookInterview(id, interview) {
+    console.log(state.days);
+    for (let day of [...state.days]) {
+      if (day.appointments.includes(id)) {
+        day.spots -= 1;
+      }
+    }
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -39,6 +47,11 @@ export default function Application(props) {
   }
 
   function cancelInterview(id) {
+    for (let day of [...state.days]) {
+      if (day.appointments.includes(id)) {
+        day.spots += 1
+      }
+    }
     const appointment = {
       ...state.appointments[id],
       interview: null
