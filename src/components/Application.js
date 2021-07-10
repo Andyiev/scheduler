@@ -4,7 +4,7 @@ import "components/Application.scss";
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
 import axios from "axios";
-import { getAppointmentsForDay, getInterview } from "../helpers/selectors"
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors"
 
 export default function Application(props) {
   const [state, setState] = useState({
@@ -14,18 +14,41 @@ export default function Application(props) {
     interviewers: {}
   });
   
-  
+
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return axios.put(`/api/appointments/${id}`, appointment)
+    .then(res => {
+      setState({...state,
+        appointments
+      });
+    
+    })
+  }
+
+  const dailyInterviewers = getInterviewersForDay(state, state.day);
+  console.log("++++++++ ", dailyInterviewers);
   const setDay = day => setState({ ...state, day });
   const appointments = getAppointmentsForDay(state, state.day);
   const schedule = appointments.map((appointment) => {
-    console.log(state.interviewers)
-  const interview = getInterview(state, appointment.interview);
+    const interview = getInterview(state, appointment.interview);
+
     return (
       <Appointment
       key={appointment.id}
       id={appointment.id}
       time={appointment.time}
       interview={interview}
+      interviewers={dailyInterviewers}
+      bookInterview={bookInterview}
     />
     )
   });
@@ -38,14 +61,12 @@ export default function Application(props) {
       Promise.resolve(axios.get("/api/interviewers"))
 
     ]).then((all) => {
-      console.log(" +++++++ This is returned data of PROMISE++++++++++",all)
-      
+        
       setState(prev => ({ ...prev,days: all[0].data, appointments: all[1].data, interviewers: all[2].data}))
      
     })
   }, []);
  
-
   return (
     <main className="layout">
       <section className="sidebar">
