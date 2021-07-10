@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "components/Appointment/styles.scss";
-import Button from "components/Button";
 
 const Error = function(props) {
   return (
