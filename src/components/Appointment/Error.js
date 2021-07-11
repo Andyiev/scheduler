@@ -13,7 +13,7 @@ const Error = function(props) {
         className="appointment__error-close"
         src="images/close.png"
         alt="Close"
-        onClose={props.onClose}
+        onClick={props.onClose}
       />
     </main>
   );
