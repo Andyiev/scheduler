@@ -25,12 +25,6 @@ export default function Application(props) {
 
   function bookInterview(id, interview) {
     console.log(state.days);
-    for (let day of [...state.days]) {
-      if (day.appointments.includes(id)) {
-        day.spots -= 1;
-      }
-    }
-
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -39,11 +33,19 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-
+  
+    for (let day of [...state.days]) {
+      if (day.appointments.includes(id)) {
+        console.log("This is id", id);
+        console.log("This is day.appointments", day.appointments);
+        console.log("This day.spots before", day.spots);
+        day.spots -= 1;
+        console.log("This day.spots after", day.spots);
+      }
+    }
     return axios.put(`/api/appointments/${id}`, appointment)
     .then(res => setState({...state, appointments}));
-    
-    
+   
   }
 
   function cancelInterview(id) {
