@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Button from "components/Button";
 
-import InterviewerList from "components/InterviewList";
+import InterviewerList from "components/InterviewerList";
 
 const Form = function(props) {
   const [name, setName] = useState(props.name || "");
