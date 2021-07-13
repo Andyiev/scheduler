@@ -33,14 +33,14 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
+    //if (changeSpots) {
     for (let day of [...state.days]) {
       if (day.appointments.includes(id)) {
-        console.log("+++++++++", changeSpots);
-        if (changeSpots) {
+        //console.log("+++++++++", changeSpots);
         day.spots -= 1;
         }
       }
-    }
+    //}
     return axios.put(`/api/appointments/${id}`, appointment)
     .then(res => setState({...state, appointments}));
    
