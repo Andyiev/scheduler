@@ -23,14 +23,14 @@ const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   
-  function save(name, interviewer) {
+  function save(name, interviewer, changeSpots) {
     const interview = {
       student: name,
       interviewer
     };
 
     transition(SAVING);
-    props.bookInterview(props.id, interview)
+    props.bookInterview(props.id, interview, changeSpots)
     .then(res => {
       transition(SHOW);
     })
@@ -84,6 +84,7 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onCancel={() => back()}
           onSave={save}
+          changeSpots={true}
           />
       )}
       {mode === SAVING && (

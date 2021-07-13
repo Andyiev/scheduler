@@ -23,8 +23,8 @@ export default function Application(props) {
 
   const setDay = day => setState({ ...state, day });
 
-  function bookInterview(id, interview) {
-    console.log(state.days);
+  function bookInterview(id, interview, changeSpots) {
+    //console.log(state.days);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -33,14 +33,15 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-  
-    for (let day of [...state.days]) {
-      if (day.appointments.includes(id)) {
-        console.log("This is id", id);
-        console.log("This is day.appointments", day.appointments);
-        console.log("This day.spots before", day.spots);
-        day.spots -= 1;
-        console.log("This day.spots after", day.spots);
+    if (changeSpots) {
+      for (let day of [...state.days]) {
+        if (day.appointments.includes(id)) {
+        //console.log("This is id", id);
+        //console.log("This is day.appointments", day.appointments);
+        //console.log("This day.spots before", day.spots);
+          day.spots -= 1;
+        //console.log("This day.spots after", day.spots);
+        }
       }
     }
     return axios.put(`/api/appointments/${id}`, appointment)
@@ -59,7 +60,7 @@ export default function Application(props) {
       interview: null
     };
     
-    return axios.delete(`/api/appointments/${id}`, { interview: null })
+    return axios.delete(`/api/appointments/${id}`)
     .then(res => setState(prev => ({...prev, appointments: {...prev.appointments, [id]: appointment}})))
   }
   return{ state, setDay, bookInterview, cancelInterview }
