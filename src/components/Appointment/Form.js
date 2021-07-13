@@ -17,7 +17,7 @@ const Form = function(props) {
       //  setError("An interviewer must be selected");
       //  return;
     }
-  
+    setError("");
     props.onSave(name, interviewer);
   }
   
