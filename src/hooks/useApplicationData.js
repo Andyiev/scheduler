@@ -33,14 +33,11 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    if (changeSpots) {
-      for (let day of [...state.days]) {
-        if (day.appointments.includes(id)) {
-        //console.log("This is id", id);
-        //console.log("This is day.appointments", day.appointments);
-        //console.log("This day.spots before", day.spots);
-          day.spots -= 1;
-        //console.log("This day.spots after", day.spots);
+    for (let day of [...state.days]) {
+      if (day.appointments.includes(id)) {
+        console.log("+++++++++", changeSpots);
+        if (changeSpots) {
+        day.spots -= 1;
         }
       }
     }
