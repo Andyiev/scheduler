@@ -46,7 +46,7 @@ const Form = function(props) {
             type="text"
             placeholder="Enter Student Name"
             onChange={(event) => setName(event.target.value)}
-          data-testid="student-name-input"
+            data-testid="student-name-input"
           />
         </form>
         <section className="appointment__validation">{error}</section>

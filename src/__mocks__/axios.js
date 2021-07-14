@@ -52,38 +52,45 @@ const fixtures = {
     }
   }
 };
-
+// USING OBJECT REFERENCE
 export default {
-  defaults: { baseURL: "" },
+  defaults: { baseURL: "http://localhost:8001" },
   get: jest.fn(url => {
-    if (url === "/api/days") {
-      return Promise.resolve({
-        status: 200,
-        statusText: "OK",
-        data: fixtures.days
-      });
-    }
+    const days = Promise.resolve({
+      status: 200,
+      statusText: "OK",
+      data: fixtures.days
+    });
+    const appointments = Promise.resolve({
+      status: 200,
+      statusText: "OK",
+      data: fixtures.appointments
+    });
+    const interviewers = Promise.resolve({
+      status: 200,
+      statusText: "OK",
+      data: fixtures.interviewers
+    });
+    const response = {
+      "/api/days": days,
+      "/api/appointments": appointments,
+      "/api/interviewers": interviewers
+    };
 
-    if (url === "/api/appointments") {
-      /* Resolve appointments data */
-      return Promise.resolve({
-        status: 200,
-        statusText: "OK",
-        data: fixtures.appointments
-      });
-    }
-
-    if (url === "/api/interviewers") {
-      /* Resolve interviewers data */
-      return Promise.resolve({
-        status: 200,
-        statusText: "OK",
-        data: fixtures.interviewers
-      });
-    }
+    return response[url];
+  }),
+  put: jest.fn(() => {
+    return Promise.resolve({
+      status: 204,
+      statusText: "No Content"
+    });
+  }),
+  delete: jest.fn(() => {
+    return Promise.resolve({
+      status: 204,
+      statusText: "No Content"
+    });
   })
-};
-
-
+} 
 
 
