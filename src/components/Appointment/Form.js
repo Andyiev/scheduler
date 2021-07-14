@@ -9,7 +9,7 @@ const Form = function(props) {
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
-  //const changeSpots = props.changeSpots || null;
+  const changeSpots = props.changeSpots || null;
 
   function validate() {
     if (name === "") {
@@ -21,7 +21,6 @@ const Form = function(props) {
     }
     setError("");
     props.onSave(name, interviewer);
-    //props.onSave(name, interviewer, changeSpots);
   }
   
   function reset() {

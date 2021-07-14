@@ -25,6 +25,7 @@ export default function Appointment(props) {
   
   //function save(name, interviewer, changeSpots) {
   function save(name, interviewer) {
+    if (name && interviewer) {
     const interview = {
       student: name,
       interviewer
@@ -37,7 +38,10 @@ export default function Appointment(props) {
       transition(SHOW);
     })
     .catch(error => transition(ERROR_SAVE, true)); 
+  } else {
+    transition(ERROR_SAVE)
   }
+}
 
   function deleteInterview(name, interviewer) {
     const interview = {
@@ -87,7 +91,7 @@ export default function Appointment(props) {
       )}
        {mode === CONFIRM && (
         <Confirm 
-          message="Are you sure you want to delete?" onCancel={back} onConfirm={deleteInterview}
+          message="Are you sure you would like to delete?" onCancel={back} onConfirm={deleteInterview}
           />
        )}
         {mode === EDIT && (

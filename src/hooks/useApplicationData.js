@@ -33,23 +33,25 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    //if (changeSpots) {
+    
     for (let day of [...state.days]) {
-      if (day.appointments.includes(id)) {
-        //console.log("+++++++++", changeSpots);
+      if (day.appointments.includes(id) && !state.appointments[id].interview) {
+      
         day.spots -= 1;
-        }
       }
-    //}
+    }
+    
     return axios.put(`/api/appointments/${id}`, appointment)
     .then(res => setState({...state, appointments}));
    
   }
 
   function cancelInterview(id) {
-    for (let day of [...state.days]) {
-      if (day.appointments.includes(id)) {
-        day.spots += 1
+    const newDays = [...state.days];
+
+    for (let index in [...state.days]) {
+      if (state.days[index].appointments.includes(id)) {
+        newDays[index].spots += 1
       }
     }
     const appointment = {
@@ -58,7 +60,7 @@ export default function Application(props) {
     };
     
     return axios.delete(`/api/appointments/${id}`)
-    .then(res => setState(prev => ({...prev, appointments: {...prev.appointments, [id]: appointment}})))
+    .then(res => setState(prev => ({...prev, days: newDays, appointments: {...prev.appointments, [id]: appointment}})))
   }
   return{ state, setDay, bookInterview, cancelInterview }
 } 
