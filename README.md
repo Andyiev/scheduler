@@ -1,23 +1,19 @@
 # Interview Scheduler
+Scheduler is a single page app designed for students to book an interview with an instructor. Users can create, edit and delete appointments, and receive messages if errors occur.
 
-## Setup
+## Screenshots
 
-Install dependencies with `npm install`.
+## Dependencies
 
-## Running Webpack Development Server
+- axios
+- classnames
+- normalize.css
+- nvm
+- react
+- react-dom
+- react-scripts
 
-```sh
-npm start
-```
+## Getting Started
 
-## Running Jest Test Framework
-
-```sh
-npm test
-```
-
-## Running Storybook Visual Testbed
-
-```sh
-npm run storybook
-```
+- Install all dependencies (using the `npm install` command).
+- Run the development web server using the `npm start` command.
