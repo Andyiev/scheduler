@@ -23,7 +23,6 @@ const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   
-  //function save(name, interviewer, changeSpots) {
   function save(name, interviewer) {
     if (name && interviewer) {
     const interview = {
@@ -33,13 +32,12 @@ export default function Appointment(props) {
 
     transition(SAVING, true);
     props.bookInterview(props.id, interview)
-    //props.bookInterview(props.id, interview, changeSpots)
+  
     .then(res => {
       transition(SHOW);
     })
     .catch(error => transition(ERROR_SAVE, true)); 
-  } else {
-    transition(ERROR_SAVE)
+  
   }
 }
 
@@ -74,7 +72,7 @@ export default function Appointment(props) {
       {mode === CREATE && (
         <Form
           interviewers={props.interviewers}
-          onCancel={() => back()}
+          onCancel={back}
           onSave={save}
           
           />
@@ -99,7 +97,7 @@ export default function Appointment(props) {
             name={props.interview.student} 
             interviewers={props.interviewers} 
             interviewer={props.interview.interviewer.id} 
-            onCancel={() => back()} 
+            onCancel={back} 
             onSave={save}
         />
         )}

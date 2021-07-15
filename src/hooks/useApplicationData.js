@@ -23,8 +23,7 @@ export default function Application(props) {
 
   const setDay = day => setState({ ...state, day });
 
-  function bookInterview(id, interview, changeSpots) {
-    //console.log(state.days);
+  function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -36,7 +35,6 @@ export default function Application(props) {
     
     for (let day of [...state.days]) {
       if (day.appointments.includes(id) && !state.appointments[id].interview) {
-      
         day.spots -= 1;
       }
     }

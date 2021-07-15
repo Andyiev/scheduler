@@ -2,7 +2,6 @@ import React from "react";
 import DayListItem from "components/DayListItem";
 
 const DayList = function(props) {
-  //console.log("====== props.days ====", props.days)
 
   const days = props.days.map(day => {
   return (

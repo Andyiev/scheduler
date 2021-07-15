@@ -9,15 +9,14 @@ const Form = function(props) {
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
-  const changeSpots = props.changeSpots || null;
-
+  
   function validate() {
     if (name === "") {
       setError("Student name cannot be blank");
       return;
-      // } else if (interviewer === null) {
-      //  setError("An interviewer must be selected");
-      //  return;
+    } else if (interviewer === null) {
+       setError("An interviewer must be selected");
+       return;
     }
     setError("");
     props.onSave(name, interviewer);
