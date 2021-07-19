@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-
 import Button from "components/Button";
-
 import InterviewerList from "components/InterviewerList";
 
 const Form = function(props) {
@@ -9,7 +7,7 @@ const Form = function(props) {
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
-  
+  // validation to have all names
   function validate() {
     if (name === "") {
       setError("Student name cannot be blank");
@@ -32,8 +30,6 @@ const Form = function(props) {
     props.onCancel();
   }
   
-  
-
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">

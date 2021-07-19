@@ -15,5 +15,4 @@ const DayList = function(props) {
   return (<ul>{days}</ul>);
 }
 
-
 export default DayList;

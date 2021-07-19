@@ -19,27 +19,21 @@ const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
-
-
 export default function Appointment(props) {
-  
   function save(name, interviewer) {
     if (name && interviewer) {
     const interview = {
       student: name,
       interviewer
     };
-
     transition(SAVING, true);
     props.bookInterview(props.id, interview)
-  
     .then(res => {
       transition(SHOW);
     })
     .catch(error => transition(ERROR_SAVE, true)); 
-  
+    }
   }
-}
 
   function deleteInterview(name, interviewer) {
     const interview = {
@@ -66,7 +60,6 @@ export default function Appointment(props) {
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(EDIT)}
-          
         />
       )}
       {mode === CREATE && (
@@ -74,7 +67,6 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
-          
           />
       )}
       {mode === SAVING && (
@@ -107,7 +99,6 @@ export default function Appointment(props) {
         {mode === ERROR_SAVE && (
           <Error message="Could not save appointment" onClose={back} />
         )}
-
     </article>
   );
 }
