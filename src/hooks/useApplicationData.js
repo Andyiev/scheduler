@@ -33,19 +33,20 @@ export default function Application(props) {
       [id]: appointment
     };
     
-    for (let day of [...state.days]) {
+    const days = JSON.parse(JSON.stringify([...state.days])); // deep copy
+    for (let day of days) {
       if (day.appointments.includes(id) && !state.appointments[id].interview) {
         day.spots -= 1;
       }
     }
     
     return axios.put(`/api/appointments/${id}`, appointment)
-    .then(res => setState({...state, appointments}));
+    .then(res => setState({...state, appointments, days}));
    
   }
 
   function cancelInterview(id) {
-    const newDays = [...state.days];
+    const newDays = JSON.parse(JSON.stringify([...state.days]));
 
     for (let index in [...state.days]) {
       if (state.days[index].appointments.includes(id)) {
